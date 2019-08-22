@@ -210,7 +210,7 @@ static uint16_t mdio_read_req(struct MDIOBus *bus, unsigned int addr,
 
     phy = bus->devs[addr];
     if (phy && phy->read) {
-        data = phy->read(phy, reg);
+        data = (*phy->read)(phy, reg);
     } else {
         data = 0xffff;
     }

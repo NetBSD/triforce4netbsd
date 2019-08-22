@@ -371,7 +371,9 @@ tests/test-qemu-opts$(EXESUF): tests/test-qemu-opts.o libqemuutil.a libqemustub.
 tests/test-write-threshold$(EXESUF): tests/test-write-threshold.o $(block-obj-y) libqemuutil.a libqemustub.a
 
 ifeq ($(CONFIG_POSIX),y)
+ifneq ($(CONFIG_SOLARIS),y)
 LIBS += -lutil
+endif
 endif
 
 # QTest rules

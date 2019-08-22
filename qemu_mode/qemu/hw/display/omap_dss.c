@@ -794,18 +794,18 @@ static void omap_rfbi_write(void *opaque, hwaddr addr,
         break;
     case 0x58:	/* RFBI_READ */
         if ((s->rfbi.control & (1 << 2)) && s->rfbi.chip[0])
-            s->rfbi.rxbuf = s->rfbi.chip[0]->read(s->rfbi.chip[0]->opaque, 1);
+	    s->rfbi.rxbuf = (*s->rfbi.chip[0]->read)(s->rfbi.chip[0]->opaque, 1);
         else if ((s->rfbi.control & (1 << 3)) && s->rfbi.chip[1])
-            s->rfbi.rxbuf = s->rfbi.chip[1]->read(s->rfbi.chip[1]->opaque, 1);
+	    s->rfbi.rxbuf = (*s->rfbi.chip[1]->read)(s->rfbi.chip[1]->opaque, 1);
         if (!-- s->rfbi.pixels)
             omap_rfbi_transfer_stop(s);
         break;
 
     case 0x5c:	/* RFBI_STATUS */
         if ((s->rfbi.control & (1 << 2)) && s->rfbi.chip[0])
-            s->rfbi.rxbuf = s->rfbi.chip[0]->read(s->rfbi.chip[0]->opaque, 0);
+	    s->rfbi.rxbuf = (*s->rfbi.chip[0]->read)(s->rfbi.chip[0]->opaque, 0);
         else if ((s->rfbi.control & (1 << 3)) && s->rfbi.chip[1])
-            s->rfbi.rxbuf = s->rfbi.chip[1]->read(s->rfbi.chip[1]->opaque, 0);
+	    s->rfbi.rxbuf = (*s->rfbi.chip[1]->read)(s->rfbi.chip[1]->opaque, 0);
         if (!-- s->rfbi.pixels)
             omap_rfbi_transfer_stop(s);
         break;

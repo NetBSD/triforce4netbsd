@@ -1173,7 +1173,7 @@ int AUD_read (SWVoiceIn *sw, void *buf, int size)
         return 0;
     }
 
-    bytes = sw->hw->pcm_ops->read (sw, buf, size);
+    bytes = (*sw->hw->pcm_ops->read )(sw, buf, size);
     return bytes;
 }
 
